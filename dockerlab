@@ -1,0 +1,34 @@
+#!/bin/zsh
+
+# get name of current project
+PROJECT_NAME=$(basename $PWD)
+
+# if there is a requirements file
+if [ -f "requirements.txt" ]; then
+    echo "\nINSTALLING dependencies for $PROJECT_NAME\n"
+    DOCKERFILE="$(dirname $0)/Dockerfile"
+    PROJECT_IMAGE="$PROJECT_NAME"
+    docker build --rm -f $DOCKERFILE -t $PROJECT_IMAGE .
+else
+    PROJECT_IMAGE="jupyter/minimal-notebook"
+fi
+
+echo "\nSTARTING jupyterlab in docker for $PROJECT_NAME\n"
+
+docker run -it -d --rm=true \
+    --user root \
+    -e NB_USER=$USER \
+    -e GRANT_SUDO=yes \
+    -p 8888:8888 \
+    -e JUPYTER_TOKEN="$PROJECT_NAME" \
+    --name "$PROJECT_NAME" \
+    -v $PWD:/home/jovyan/work/$PROJECT_NAME \
+    -w /home/jovyan/work/$PROJECT_NAME \
+    $PROJECT_IMAGE
+    
+    # install requirements if exist
+    # (or install from pyproject.toml)
+
+sleep 1
+
+open "http://localhost:8888/lab?token=$PROJECT_NAME"
