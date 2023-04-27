@@ -25,9 +25,6 @@ docker run -it -d --rm=true \
     -v $PWD:/home/jovyan/work/$PROJECT_NAME \
     -w /home/jovyan/work/$PROJECT_NAME \
     $PROJECT_IMAGE
-    
-    # install requirements if exist
-    # (or install from pyproject.toml)
 
 sleep 1
 
