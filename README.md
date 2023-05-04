@@ -10,5 +10,5 @@ Shell script to start a jupyterlab in a docker container in which dependencies f
     ```
 2. Create a symlink into a directory in your path:
     ```
-    ln -s ./docker-jupyterlab-starter/dockerlab ~/.local/bin/dlab
+    ln -s $PWD/docker-jupyterlab-starter/dockerlab ~/.local/bin/dlab
     ```
