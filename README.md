@@ -12,3 +12,7 @@ Shell script to start a jupyterlab in a docker container in which dependencies f
     ```
     ln -s $PWD/docker-jupyterlab-starter/dockerlab ~/.local/bin/dlab
     ```
+3. Run the following command in the directory of your project:
+    ```
+    denv
+    ```
