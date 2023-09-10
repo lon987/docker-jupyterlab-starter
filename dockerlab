@@ -16,7 +16,6 @@ fi
 echo "\nSTARTING jupyterlab in container for project: $PROJECT_NAME\n"
 
 docker run -it -d --rm=true \
-    --user root \
     -e NB_USER=$USER \
     -e GRANT_SUDO=yes \
     -p 8888:8888 \
