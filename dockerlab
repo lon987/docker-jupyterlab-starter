@@ -5,15 +5,15 @@ PROJECT_NAME=$(basename $PWD)
 
 # if there is a requirements file
 if [ -f "requirements.txt" ]; then
-    echo "\nINSTALLING dependencies for $PROJECT_NAME\n"
-    DOCKERFILE="$(dirname $0)/Dockerfile"
+    echo "\nINSTALLING dependencies for project: $PROJECT_NAME\n"
+    DOCKERFILE="$(dirname $(readlink -f $0))/Dockerfile"
     PROJECT_IMAGE="$PROJECT_NAME"
     docker build --rm -f $DOCKERFILE -t $PROJECT_IMAGE .
 else
     PROJECT_IMAGE="jupyter/minimal-notebook"
 fi
 
-echo "\nSTARTING jupyterlab in docker for $PROJECT_NAME\n"
+echo "\nSTARTING jupyterlab in container for project: $PROJECT_NAME\n"
 
 docker run -it -d --rm=true \
     --user root \
